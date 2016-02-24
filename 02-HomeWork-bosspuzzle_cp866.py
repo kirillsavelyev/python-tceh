@@ -1,6 +1,6 @@
 # -*- coding: cp866 -*-
-
-from random import shuffle # see https://docs.python.org/2/library/random.html
+# see https://docs.python.org/2/library/random.html
+from random import shuffle
 from sys import version_info
 
 if version_info[0] == 2:
@@ -10,26 +10,24 @@ else:
 
 EMPTY_MARK = 'empty'
 
+
 def shuffle_field():
-    f = [x for x in range(1,16)]
+    f = [x for x in range(1, 16)]
     f.append(EMPTY_MARK)
     winner_field = f[:]
     shuffle(f)
-    return f,winner_field
+    return f, winner_field
 
 
 def print_field(field):
-    for i in range(0,16,4):
+    for i in range(0, 16, 4):
         row = ''
-        for j in range(i,i+4):
+        for j in range(i, i+4):
             row += str(field[j]) + '\t'
         print (row)
 
 
-
-
-
-def is_game_finished(field,winner_field):
+def is_game_finished(field, winner_field):
     if field == winner_field:
         return True
     else:
@@ -39,31 +37,29 @@ def is_game_finished(field,winner_field):
 def perform_move(field, key):
     i = field.index(EMPTY_MARK)
     if key.lower() == 'w':
-    	if i not in range(0,4):
-    		field[i],field[i-4] = field[i-4],field[i]
-    	else:
-    	    raise IndexError
-    	
-    elif key.lower() == 's':
-    	if i not in range(12,16):
-    		field[i],field[i+4] = field[i+4],field[i]
-    	else:
-    	    raise IndexError
-    
-    elif key.lower() == 'a':
-    	if i not in range(0,13,4):
-    		field[i],field[i-1] = field[i-1],field[i]
-    	else:
-    	    raise IndexError
-    
-    elif key.lower() == 'd':
-    	if i not in range(3,16,4):
-    		field[i],field[i+1] = field[i+1],field[i]
-    	else:
-    	    raise IndexError
+        if i not in range(0, 4):
+            field[i], field[i-4] = field[i-4], field[i]
+        else:
+            raise IndexError
 
-        #else:
-         #   print('\nВы ошиблись при выборе клавиши управления.')
+    elif key.lower() == 's':
+        if i not in range(12, 16):
+            field[i], field[i+4] = field[i+4], field[i]
+        else:
+            raise IndexError
+
+    elif key.lower() == 'a':
+        if i not in range(0, 13, 4):
+            field[i], field[i-1] = field[i-1], field[i]
+        else:
+            raise IndexError
+
+    elif key.lower() == 'd':
+        if i not in range(3, 16, 4):
+            field[i], field[i+1] = field[i+1], field[i]
+        else:
+            raise IndexError
+
 
 def handle_user_input():
     movement = input_function('\nВведите направление движения в формате WSAD: ')
@@ -71,20 +67,20 @@ def handle_user_input():
 
 
 def main():
-    print('\nДобро пожаловать в игру Пятнашки\n\
+    print('\nДобро пожаловать в игру Пятнашки\n\n\
 Управление движением пустого квадрата осуществляется по схеме:\n\
 "w" - вверх, "s" - вниз,\n\
 "a" - влево, "d" - вправо\n\n')
-    field,winner_field = shuffle_field()
+    field, winner_field = shuffle_field()
     print_field(field)
-    while not is_game_finished(field,winner_field):
+    while not is_game_finished(field, winner_field):
         try:
-            perform_move(field,handle_user_input())
+            perform_move(field, handle_user_input())
             print_field(field)
-            
-        except Exception as ex:
+
+        except IndexError:
             print ('\nНельзя двигать квадрат за пределы поля!')
-            
+
     else:
         print ('\nПоздравляю, Вы выиграли!')
 
