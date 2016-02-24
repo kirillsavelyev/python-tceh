@@ -11,11 +11,6 @@ else:
 EMPTY_MARK = 'empty'
 
 def shuffle_field():
-    """
-    This method is used to create a field at the very start of the game.
-    :return: list with 16 randomly shuffled tiles,
-    one of which is a empty space.
-    """
     f = [x for x in range(1,16)]
     f.append(EMPTY_MARK)
     winner_field = f[:]
@@ -24,11 +19,6 @@ def shuffle_field():
 
 
 def print_field(field):
-    """
-    This method prints field to user.
-    :param field: current field state to be printed.
-    :return: None
-    """
     for i in range(0,16,4):
         row = ''
         for j in range(i,i+4):
@@ -40,11 +30,6 @@ def print_field(field):
 
 
 def is_game_finished(field,winner_field):
-    """
-    This method checks if the game is finished.
-    :param field: current field state.
-    :return: True if the game is finished, False otherwise.
-    """
     if field == winner_field:
         return True
     else:
@@ -52,63 +37,56 @@ def is_game_finished(field,winner_field):
 
 
 def perform_move(field, key):
-    """
-    Moves empty-tile inside the field.
-    :param field: current field state.
-    :param key: move direction.
-    :return: new field state (after the move).
-    :raises: IndexError if the move can't me done.
-    """
-    #if key.lower() in ['w','s','a','d']:
-    try:
-        i = field.index(EMPTY_MARK)
-        if key.lower() == 'w':
-            if i not in range(0,4):
-                field[i],field[i-4] = field[i-4],field[i]
+    i = field.index(EMPTY_MARK)
+    if key.lower() == 'w':
+    	if i not in range(0,4):
+    		field[i],field[i-4] = field[i-4],field[i]
+    	else:
+    	    raise IndexError
+    	
+    elif key.lower() == 's':
+    	if i not in range(12,16):
+    		field[i],field[i+4] = field[i+4],field[i]
+    	else:
+    	    raise IndexError
+    
+    elif key.lower() == 'a':
+    	if i not in range(0,13,4):
+    		field[i],field[i-1] = field[i-1],field[i]
+    	else:
+    	    raise IndexError
+    
+    elif key.lower() == 'd':
+    	if i not in range(3,16,4):
+    		field[i],field[i+1] = field[i+1],field[i]
+    	else:
+    	    raise IndexError
 
-        if key.lower() == 's':
-            if i not in range(12,16):
-                field[i],field[i+4] = field[i+4],field[i]
-
-        if key.lower() == 'a':
-            if i not in range(0,13,4):
-                field[i],field[i-1] = field[i-1],field[i]
-
-        if key.lower() == 'd':
-            if i not in range(3,16,4):
-                field[i],field[i+1] = field[i+1],field[i]
-
-        else:
-            print('Вы ошиблись при выборе клавиши управления.')
-
-    except IndexError:
-        print ('Неверное направление движения!')
-        handle_user_input()
-
+        #else:
+         #   print('\nВы ошиблись при выборе клавиши управления.')
 
 def handle_user_input():
-    """
-    Handles user input. List of accepted moves:
-    'w' - up, 's' - down,
-    'a' - left, 'd' - right
-    :return: <str> current move.
-    """
-    movement = input_function('Введите направление движения в формате WSAD: ')
+    movement = input_function('\nВведите направление движения в формате WSAD: ')
     return movement
 
 
 def main():
-    """
-    The main method.
-    :return: None
-    """
+    print('\nДобро пожаловать в игру Пятнашки\n\
+Управление движением пустого квадрата осуществляется по схеме:\n\
+"w" - вверх, "s" - вниз,\n\
+"a" - влево, "d" - вправо\n\n')
     field,winner_field = shuffle_field()
     print_field(field)
     while not is_game_finished(field,winner_field):
-        perform_move(field,handle_user_input())
-        print_field(field)
+        try:
+            perform_move(field,handle_user_input())
+            print_field(field)
+            
+        except Exception as ex:
+            print ('\nНельзя двигать квадрат за пределы поля!')
+            
     else:
-        print ('Поздравляю, Вы выиграли!')
+        print ('\nПоздравляю, Вы выиграли!')
 
 # see http://stackoverflow.com/questions/419163/what-does-if-name-main-do
 if __name__ == '__main__':
