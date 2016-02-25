@@ -14,9 +14,8 @@ EMPTY_MARK = 'empty'
 def shuffle_field():
     f = [x for x in range(1, 16)]
     f.append(EMPTY_MARK)
-    winner_field = f[:]
     shuffle(f)
-    return f, winner_field
+    return f
 
 
 def print_field(field):
@@ -27,11 +26,10 @@ def print_field(field):
         print (row)
 
 
-def is_game_finished(field, winner_field):
-    if field == winner_field:
-        return True
-    else:
-        return False
+def is_game_finished(field):
+    winner_field = [x for x in range(1, 16)]
+    winner_field.append(EMPTY_MARK)
+    return field == winner_field
 
 
 def perform_move(field, key):
@@ -71,9 +69,9 @@ def main():
 Управление движением пустого квадрата осуществляется по схеме:\n\
 "w" - вверх, "s" - вниз,\n\
 "a" - влево, "d" - вправо\n\n')
-    field, winner_field = shuffle_field()
+    field = shuffle_field()
     print_field(field)
-    while not is_game_finished(field, winner_field):
+    while not is_game_finished(field):
         try:
             perform_move(field, handle_user_input())
             print_field(field)
