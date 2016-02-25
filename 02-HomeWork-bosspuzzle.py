@@ -12,6 +12,11 @@ EMPTY_MARK = 'empty'
 
 
 def shuffle_field():
+    """
+    This method is used to create a field at the very start of the game.
+    :return: list with 16 randomly shuffled tiles,
+    one of which is a empty space.
+    """
     f = [x for x in range(1, 16)]
     f.append(EMPTY_MARK)
     shuffle(f)
@@ -19,6 +24,11 @@ def shuffle_field():
 
 
 def print_field(field):
+    """
+    This method prints field to user.
+    :param field: current field state to be printed.
+    :return: None
+    """
     for i in range(0, 16, 4):
         row = ''
         for j in range(i, i+4):
@@ -27,12 +37,24 @@ def print_field(field):
 
 
 def is_game_finished(field):
+    """
+    This method checks if the game is finished.
+    :param field: current field state.
+    :return: True if the game is finished, False otherwise.
+    """
     winner_field = [x for x in range(1, 16)]
     winner_field.append(EMPTY_MARK)
     return field == winner_field
 
 
 def perform_move(field, key):
+    """
+    Moves empty-tile inside the field.
+    :param field: current field state.
+    :param key: move direction.
+    :return: new field state (after the move).
+    :raises: IndexError if the move can't me done.
+    """
     i = field.index(EMPTY_MARK)
     if key.lower() == 'w':
         if i not in range(0, 4):
@@ -58,13 +80,28 @@ def perform_move(field, key):
         else:
             raise IndexError
 
+    else:
+        print ('\nУправление только клавишами WSAD.\n')
+
+    return field
+
 
 def handle_user_input():
+    """
+    Handles user input. List of accepted moves:
+    'w' - up, 's' - down,
+    'a' - left, 'd' - right
+    :return: <str> current move.
+    """
     movement = input_function('\nВведите направление движения в формате WSAD: ')
     return movement
 
 
 def main():
+    """
+    The main method.
+    :return: None
+    """
     print('\nДобро пожаловать в игру Пятнашки\n\n\
 Управление движением пустого квадрата осуществляется по схеме:\n\
 "w" - вверх, "s" - вниз,\n\
@@ -73,8 +110,7 @@ def main():
     print_field(field)
     while not is_game_finished(field):
         try:
-            perform_move(field, handle_user_input())
-            print_field(field)
+            print_field(perform_move(field, handle_user_input()))
 
         except IndexError:
             print ('\nНельзя двигать квадрат за пределы поля!')

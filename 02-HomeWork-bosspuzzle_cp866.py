@@ -29,7 +29,7 @@ def print_field(field):
 def is_game_finished(field):
     winner_field = [x for x in range(1, 16)]
     winner_field.append(EMPTY_MARK)
-    return field == winner_field:
+    return field == winner_field
 
 
 def perform_move(field, key):
@@ -58,6 +58,11 @@ def perform_move(field, key):
         else:
             raise IndexError
 
+    else:
+        print ('\nУправление только клавишами WSAD.\n')
+        
+    return field
+
 
 def handle_user_input():
     movement = input_function('\nВведите направление движения в формате WSAD: ')
@@ -73,8 +78,7 @@ def main():
     print_field(field)
     while not is_game_finished(field):
         try:
-            perform_move(field, handle_user_input())
-            print_field(field)
+            print_field(perform_move(field, handle_user_input()))
 
         except IndexError:
             print ('\nНельзя двигать квадрат за пределы поля!')
