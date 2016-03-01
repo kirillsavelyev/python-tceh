@@ -176,7 +176,8 @@ class SaveCommand(BaseCommand):
         return 'save'
 
     def perform(self, objects, *args, **kwargs):
-        pickle.dump(objects, open(b"job_list.obj", 'wb'))
+        with open(b"job_list.obj", 'wb') as job_list_w:
+            pickle.dump(objects, job_list_w)
 
         print ('All jobs saved in file job_list.obj')
 
@@ -193,10 +194,11 @@ class LoadCommand(BaseCommand):
 
     def perform(self, objects, *args, **kwargs):
         try:
-            f = open("job_list.obj", 'rb')
-            temp = pickle.load(f)
+            job_list_r = open("job_list.obj", 'rb')
+            temp = pickle.load(job_list_r)
             for s in temp:
                 objects.append(s)
+            job_list_r.close()
 
             print ('Tasks list after loading:')
             for index, obj in enumerate(objects):
