@@ -8,7 +8,8 @@ from base import *
 
 
 class GameController(object):
-    SHIP_RULES = OrderedDict([(4, 1), (3, 2), (2, 3), (1, 4)])
+    SHIP_RULES = OrderedDict([(4, 1)])
+    # , (3, 2), (2, 3), (1, 4)
 
     def __init__(self):
         self.players = []
@@ -43,12 +44,17 @@ class GameController(object):
                 self.field.display_enemy_field(shooter)
                 shot = shooter.shooting(self.field, enemy.ships)
                 if shot.hit:
-                    ship = enemy.take_a_hit(shot)
+                    ship = enemy.take_a_hit(shot.coordinate)
                     if not ship.afloat:
                         print('\n', 'Ship had been destroyed!')
                 next_shooter = not shot.hit
+
+            print('Congratulations %s, you won!' % shooter)
+
         except KeyboardInterrupt:
             print('Error')
+
+        print('End of Game')
 
 
 if __name__ == '__main__':

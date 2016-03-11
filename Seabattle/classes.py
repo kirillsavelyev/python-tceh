@@ -35,11 +35,18 @@ class Player(object):
             row_start = int(d[0]) - 1
             col_start = int(d[1]) - 1
             ship = []
-            pos = []
+            pos = [row_start, col_start]
+            if (
+                        self.is_duplicate(pos) is True or
+                        self.check_perimeter(pos, field.size)):
+                raise ValueError
+            else:
+                ship.append(pos)
+
             if int(length) > 1:
                 direction = get_input('Input directions for \
 {}-ship (WASD):'.format(length))
-                it = int(length)
+                it = int(length) - 1
                 while it > 0:
                     if direction == 'w':
                         pos = [row_start - it, col_start]
@@ -49,6 +56,7 @@ class Player(object):
                         pos = [row_start + it, col_start]
                     elif direction == 'd':
                         pos = [row_start, col_start + it]
+
                     if (
                                 self.is_duplicate(pos) is True or
                                 self.check_perimeter(pos, field.size)):
@@ -56,14 +64,6 @@ class Player(object):
                     else:
                         ship.append(pos)
                         it -= 1
-            else:
-                pos = [row_start, col_start]
-                if (
-                            self.is_duplicate(pos) is True or
-                            self.check_perimeter(pos, field.size)):
-                    raise ValueError
-                else:
-                    ship.append(pos)
 
             self._ships.append(Ship(ship))
 
@@ -207,10 +207,10 @@ class Ship(object):
     def damage(self):
         return self._damage
 
-    def do_damage(self, coordinates):
-        if coordinates in self._damage:
+    def do_damage(self, shot):
+        if shot in self._damage:
             raise ValueError('Already damaged!')
-        self._damage.append(coordinates)
+        self._damage.append(shot)
 
 
 class Shot(object):
