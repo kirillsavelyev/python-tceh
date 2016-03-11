@@ -141,7 +141,7 @@ class Field(object):
         self.size = size
 
     def display_shooter_field(self, shooter):
-        print('Your ships status...')
+        print('\n', 'Your ships status...')
         field = []
 
         for i in range(int(self.size)):
@@ -169,7 +169,7 @@ class Field(object):
             print(line)
 
     def display_enemy_field(self, shooter):
-        print('Your shoots status...')
+        print('\n', 'Your shoots status...')
         field = []
 
         for i in range(int(self.size)):

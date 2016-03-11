@@ -4,7 +4,6 @@ from __future__ import print_function
 from collections import OrderedDict
 
 from classes import *
-from base import *
 
 
 class GameController(object):
@@ -35,16 +34,19 @@ class GameController(object):
         shooter, enemy = self.players
 
         # начало стрельбы
+        print('\n\n', '{}, your first!'.format(shooter.name))
         try:
             while self.check_game_status():
                 if next_shooter:
                     shooter, enemy = enemy, shooter
+                    print('\n\n', '{}, your turn!'.format(shooter.name))
                     self.field.display_shooter_field(shooter)
 
                 self.field.display_enemy_field(shooter)
                 shot = shooter.shooting(self.field, enemy.ships)
                 if shot.hit:
                     ship = enemy.take_a_hit(shot.coordinate)
+                    print('\n', 'You hit!')
                     if not ship.afloat:
                         print('\n', 'Ship had been destroyed!')
                 next_shooter = not shot.hit
@@ -58,5 +60,5 @@ class GameController(object):
 
 
 if __name__ == '__main__':
-    game = GameController() # add parameter
+    game = GameController()
     game.start_game()
