@@ -91,7 +91,7 @@ class NewCommand(BaseCommand):
         objects.append(new_object)
         print('Added {}'.format(str(new_object)))
         print()
-        return new_object
+        return 1
 
 
 class DoneCommand(BaseCommand):
