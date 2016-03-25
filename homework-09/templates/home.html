@@ -1,0 +1,49 @@
+{% extends '_base_template.html' %}
+
+{% block content %}
+
+<div class="content" xmlns="http://www.w3.org/1999/html">
+    <h1>Welcome to the "flask with templates" example!</h1>
+    <h2>From now our blog on the database!</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class=flashes>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    {% from "macros/render_field.html" import render_field %}
+    {% from "macros/render_field.html" import render_post %}
+    <form method="POST" action="{{ url_for('home') }}">
+{#        {{ form.hidden_tag() }}#}
+        <dl>
+            {% for field in form %}
+                {% if form.id != 'csrf_token' %}
+                    {{ render_field(field) }}
+                {% endif %}
+            {% endfor %}
+        </dl>
+
+        <input type="submit" value="{{ 'Submit' }}" class="btn">
+    </form>
+    <div>
+        <dl>
+            {% for post in posts %}
+                {% if post.id != 'csrf_token' %}
+                    {{ render_post(post) }}
+                {% endif %}
+                <form method="POST" action="{{ url_for('delete_post') }}">
+                    <input type="hidden" value="{{ post.id }}" name = "id">
+                    <input type="submit" value="{{ 'Delete post' }}" class="btn">
+                </form>
+                <br><br>
+            {% endfor %}
+        </dl>
+    </div>
+
+</div>
+
+{% endblock %}
