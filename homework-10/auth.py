@@ -26,11 +26,6 @@ auth = Blueprint('auth', __name__, url_prefix='/auth')
 
 
 # Views:
-@auth.before_request
-def before_request():
-    g.user = current_user
-
-
 @auth.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'GET':
