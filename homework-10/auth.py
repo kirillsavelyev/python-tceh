@@ -73,14 +73,9 @@ def login():
 
         return redirect(url_for('blog.home'))
 
-        # homepage = request.args.get('home')
-        # if not next_is_valid(homepage): # TODO: fix it
-        #     return abort(400)
     else:
         flash('Logged in unsuccessfully')
         return redirect(url_for('auth.login'))
-
-    # return render_template('login.html', form=form)
 
 
 @auth.route('/logout')
