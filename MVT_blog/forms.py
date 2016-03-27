@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from wtforms import StringField, validators, ValidationError, Form
+from flask.ext.wtf import Form
+from wtforms import StringField, validators, ValidationError
 
 # def full_name_validator(form, field):
 #     name_parts = field.data.split(' ')

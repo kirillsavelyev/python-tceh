@@ -19,7 +19,7 @@ class Storage(object):
     @classmethod
     def dump_to_json_file(cls):
         cls.posts_buffer['items'] = []
-        with open('posts_dump.json', 'w') as json_file:
+        with open('/media/ska/ESD-USB/Python/Repository/MVT_blog/posts_dump.json', 'w') as json_file:
             for item in cls.items:
                 cls.posts_buffer['items'].append(item.__dict__)
             json.dump(cls.posts_buffer, json_file)
@@ -28,7 +28,7 @@ class Storage(object):
     def load_from_json_file(cls):
         try:
             Storage.__new__(cls)
-            with open('posts_dump.json') as json_file:
+            with open('/media/ska/ESD-USB/Python/Repository/MVT_blog/posts_dump.json') as json_file:
                 json_data = json.load(json_file, )
             if json_data:
                 for post in json_data['items']:

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import config
+# from flask.ext.qrcode import QRcode
+
 from flask import Flask, request, render_template
 from models import Storage, BlogPostModel
 from forms import ContactForm
@@ -20,8 +22,8 @@ def home():
         if form.validate():
             model = BlogPostModel(form.data)
             all_items.append(model)
-            form = ContactForm()
             storage.dump_to_json_file()
+            form = ContactForm()
     else:
         form = ContactForm()
 
