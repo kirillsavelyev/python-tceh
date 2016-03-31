@@ -2,7 +2,8 @@
 
 from models import User, Post
 from wtforms_alchemy import ModelForm
-from flask_wtf import Form  #
+from flask.ext.wtf import Form
+# from flask_wtf import Form  #
 from wtforms import StringField, PasswordField, validators
 from wtforms.validators import Email, DataRequired, EqualTo
 

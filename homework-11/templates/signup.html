@@ -1,0 +1,20 @@
+{% extends '_base_template.html' %}
+
+{% block content %}
+    <b>Registration!</b>
+    <a href="{{ url_for('blog.home') }}">Blog home page</a>
+    <a href="{{ url_for('auth.login') }}">Log In</a>
+    {% from "macros/render_field.html" import render_field %}
+    <form method="POST" action="{{ url_for('auth.signup') }}">
+        {{ form.hidden_tag() }}
+        <dl>
+            {% for field in form %}
+                {% if field.id != 'csrf_token' %}
+                    {{ render_field(field) }}
+                {% endif %}
+            {% endfor %}
+        </dl>
+        <input type="submit" value="{{ 'Register' }}" class="btn">
+    </form><br>
+
+{% endblock %}

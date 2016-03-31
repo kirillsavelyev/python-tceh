@@ -1,0 +1,33 @@
+{% extends '_base_template.html' %}
+{% block content %}
+    <h2>User profile page</h2>
+    <a href="{{ url_for('blog.home') }}">Blog home page</a>
+    <a href="{{ url_for('auth.logout') }}">Log Out</a><br><br>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class=flashes>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    {% if current_user.is_authenticated %}
+        Name: {{ current_user.username }}<br>
+        E-mail: {{ current_user.email }}<br>
+    {% endif %}
+    <h3>Backward message form</h3>
+    {% from "macros/render_field.html" import render_field %}
+    <form method="POST" action="{{ url_for('blog.user_profile') }}">
+        {{ form.hidden_tag() }}
+        <dl>
+            {% for field in form %}
+                {% if field.id != 'csrf_token' %}
+                    {{ render_field(field) }}
+                {% endif %}
+            {% endfor %}
+        </dl>
+
+        <input type="submit" value="{{ 'Send message' }}" class="btn btn-default">
+    </form>
+{% endblock %}
