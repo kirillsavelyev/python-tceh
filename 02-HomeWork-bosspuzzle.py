@@ -8,7 +8,7 @@ if version_info[0] == 2:
 else:
     input_function = input
 
-EMPTY_MARK = 'empty'
+EMPTY_MARK = 'emp'
 
 
 def shuffle_field():
