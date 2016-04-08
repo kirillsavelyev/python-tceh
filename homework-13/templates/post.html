@@ -1,0 +1,69 @@
+{% extends '_base_template.html' %}
+
+{% block content_jumbotron %}
+    {% from "macros/render_field.html" import render_post %}
+        <div class="row">
+            <div class="col-md-11">
+                {% if post.id != 'csrf_token' %}
+                    {{ render_post(post) }}
+                {% endif %}
+            </div>
+            {% if current_user.id == post.user_id %}
+                <div class="col-md-1">
+                    <form method="POST" action="{{ url_for('blog.edit_post') }}">
+                        <input type="hidden" value="{{ post.id }}" name = "id">
+                        <input type="submit" value="{{ 'Edit post' }}" class="btn btn-default">
+                    </form>
+                    <form method="POST" action="{{ url_for('blog.delete_post') }}">
+                        <input type="hidden" value="{{ post.id }}" name = "id">
+                        <input type="submit" value="{{ 'Delete post' }}" class="btn btn-danger">
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+{% endblock %}
+
+{% block content %}
+    <div class="comments">
+        {% from "macros/render_field.html" import render_field %}
+        {% for comm in comments %}
+        <div class="row">
+            <div class="col-md-10">
+                {% if comm.id != 'csrf_token' %}
+                    {{ render_field(comm) }}
+                {% endif %}
+            </div>
+            <div class="col-md-2">
+                {% if current_user.id == comm.user_id %}
+                    <form method="POST" action="{{ url_for('blog.delete_comm') }}">
+                        <input type="hidden" value="{{ comm.id }}" name = "comm_id">
+                        <input type="submit" value="{{ 'Delete comment' }}" class="btn btn-danger">
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+        {% if current_user.is_authenticated %}
+{#            AJAX#}
+{#            <form method="POST" action="{{ url_for('blog.new_comm') }}" class="form-horizontal">#}
+            <form method="POST" action="ajax_comment" class="form-horizontal">
+                {{ form.hidden_tag() }}
+                {% for field in form %}
+                    {% if field.id != 'csrf_token' %}
+                        {{ render_field(field) }}
+                    {% endif %}
+                {% endfor %}
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <input type="hidden" value="{{ post.id }}" id="post_id">
+                        <input type="submit" value="{{ 'Create comment' }}" id="new_comment" class="btn btn-default">
+                    </div>
+                </div>
+            </form>
+        {% else %}
+            <h4>If you want to create comment you need log on.</h4>
+        {% endif %}
+
+
+{% endblock %}
