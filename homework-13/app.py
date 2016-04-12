@@ -4,20 +4,20 @@ import os
 import config
 
 from flask import Flask, redirect, url_for, Blueprint
-from flask_sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 from flask_mail import Mail
-
+from models import db
+# from flask_sqlalchemy import SQLAlchemy
 
 login_manager = LoginManager()
-db = SQLAlchemy()
+# db = SQLAlchemy()
 mail = Mail()
 
 base_dir = os.path.dirname(__file__)
 
 bower_blueprint = Blueprint(
         'bower', __name__, static_url_path='',
-        static_folder=os.path.join(base_dir, 'templates')
+        static_folder=os.path.join(base_dir, 'static')
     )
 
 
@@ -47,24 +47,15 @@ def create_app():
 @login_manager.user_loader
 def load_user(user_id):
     from models import User
-
     return User.query.get(user_id)
 
 
 @login_manager.unauthorized_handler
 def unauthorized():
     return redirect(url_for('auth.login'))
-    # return 'Unauthorized', 401
 
 
 if __name__ == '__main__':
     app = create_app()
     app.run()
 
-    # from models import *
-    # db.create_all()
-    # user = User(username='SKA', email='ska@yandex.ru')
-    # db.session.add(user)
-    # db.session.commit()
-
-    # TODO:  добавить егистацию и автоизацию
