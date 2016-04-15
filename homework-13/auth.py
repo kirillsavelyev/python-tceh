@@ -38,8 +38,13 @@ def signup():
         form.populate_obj(user)
         user.set_password(form.password.data)
 
-        db.session.add(user)
-        db.session.commit()
+        try:
+            db.session.add(user)
+            db.session.commit()
+        except:
+            flash('Wrongful registration! That user already exist.')
+            return render_template('signup.html', form=RegistrationForm())
+
 
         msg = Message(
             'Successful registration!',

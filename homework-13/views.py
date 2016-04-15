@@ -9,7 +9,8 @@ from flask import (
     flash,
     request,
     render_template,
-    jsonify
+    jsonify,
+    escape
 )
 from flask.ext.login import login_required, current_user
 from flask_mail import Message
@@ -104,15 +105,16 @@ def new_comm(post_id):
     if request.method == 'POST':
         user = User.query.filter_by(username=current_user.username).first()
         post = Post.query.filter_by(id=post_id).first()
-        comment = Comment(user=user, post=post, text=request.form['text'])
+        text = escape(request.form['text'])
+        comment = Comment(user=user, post=post, text=text)
         db.session.add(comment)
         db.session.commit()
 
-        comments = Comment.query.filter_by(post_id=post_id)
+        comments = Comment.query.filter_by(post_id=post_id).all()
         comments_json = {}
         for comm in comments:
             comments_json[comm.id] = {
-                "content": comm.text,
+                "content": escape(comm.text),
                 "date": str(comm.date)}
         return jsonify(comments_json)
         # TODO: must return comment.text, comment.id (for delete option)
