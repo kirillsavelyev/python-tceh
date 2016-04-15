@@ -125,7 +125,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static', 'bower_components', 'bootstrap', 'dist', 'css'),
+    os.path.join(BASE_DIR, 'static', 'bower_components'),
     os.path.join(BASE_DIR, 'static')
 ]
 
