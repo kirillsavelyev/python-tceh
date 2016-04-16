@@ -63,7 +63,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'hwapp.urls'
+ROOT_URLCONF = 'helloworld.urls'
 
 TEMPLATES = [
     {
@@ -125,7 +125,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static', 'bower_components'),
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'hwapp', 'static', 'bower_components'),
+    os.path.join(BASE_DIR, 'hwapp', 'static')
 ]
-
