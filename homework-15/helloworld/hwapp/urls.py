@@ -21,3 +21,4 @@ urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'^form/', MyView.as_view(), name='form'),
 ]
+
