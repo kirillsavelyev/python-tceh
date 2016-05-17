@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>API URLs &mdash; pizza_project 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="pizza_project 0.1.0 documentation" href="../../index.html" />
+    <link rel="up" title="Rest API" href="../../rest_api.html" />
+    <link rel="next" title="Rest Classes" href="../../rest_classes.html" />
+    <link rel="prev" title="Rest API" href="../../rest_api.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="api-urls">
+<h1>API URLs<a class="headerlink" href="#api-urls" title="Permalink to this headline">¶</a></h1>
+<p>Endpoint docs for <cite>rest_api.urls</cite>:</p>
+<span class="target" id="module-rest_api.urls"></span><dl class="data">
+<dt id="rest_api.urls.router">
+<code class="descclassname">rest_api.urls.</code><code class="descname">router</code><em class="property"> = &lt;rest_framework.routers.DefaultRouter object&gt;</em><a class="headerlink" href="#rest_api.urls.router" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registering URL of ViewSet</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>Url name</strong> (<em>PartOfUrl</em>) &#8211; <code class="docutils literal"><span class="pre">r'users'</span></code> displayed in the address bar.</li>
+<li><strong>ViewSet</strong> (<em>ViewClassName</em>) &#8211; Import from rest_classes/views.py</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Create router instance and register view sets</p>
+<p><code class="docutils literal"><span class="pre">router.register(r'users',</span> <span class="pre">UserViewSet)</span></code></p>
+<p><code class="docutils literal"><span class="pre">router.register(r'pizzamenuitem',</span> <span class="pre">PizzaMenuItemViewSet)</span></code></p>
+</dd></dl>
+
+<dl class="data">
+<dt id="rest_api.urls.urlpatterns">
+<code class="descclassname">rest_api.urls.</code><code class="descname">urlpatterns</code><em class="property"> = [&lt;RegexURLResolver &lt;RegexURLPattern list&gt; (None:None) ^&gt;]</em><a class="headerlink" href="#rest_api.urls.urlpatterns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Result of registering urls</p>
+<p>HTTP 200 OK
+Allow: GET, HEAD, OPTIONS
+Content-Type: application/json
+Vary: Accept</p>
+<dl class="docutils">
+<dt>{</dt>
+<dd><p class="first">&#8220;users&#8221;: &#8220;<a class="reference external" href="http://127.0.0.1:8000/api/users/">http://127.0.0.1:8000/api/users/</a>&#8221;,</p>
+<p class="last">&#8220;pizzamenuitem&#8221;: &#8220;<a class="reference external" href="http://127.0.0.1:8000/api/pizzamenuitem/">http://127.0.0.1:8000/api/pizzamenuitem/</a>&#8220;</p>
+</dd>
+</dl>
+<p>}</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../../rest_api.html">Rest API</a><ul>
+      <li>Previous: <a href="../../rest_api.html" title="previous chapter">Rest API</a></li>
+      <li>Next: <a href="../../rest_classes.html" title="next chapter">Rest Classes</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/modules/rest_api/urls.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Nikita Sobolev.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="../../_sources/modules/rest_api/urls.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

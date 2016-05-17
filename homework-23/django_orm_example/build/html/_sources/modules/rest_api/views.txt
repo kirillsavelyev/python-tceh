@@ -1,0 +1,7 @@
+API Views
+===========
+
+Endpoint docs for `rest_api.views`:
+
+.. automodule:: rest_api.views
+    :members:
