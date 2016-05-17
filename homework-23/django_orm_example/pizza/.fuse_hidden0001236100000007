@@ -22,8 +22,7 @@ def index(request):
         request: HttpRequest
 
     Returns:
-        * HttpResponse with rendered view template index.html
-        * Status code 405 if request method not GET
+        HttpResponse with rendered view template index.html or status code 405
     """
     if request.method == 'GET':
         pizzas = PizzaOrder.objects.all()
@@ -34,16 +33,14 @@ def index(request):
 def create(request):
     """
     This view renders a form for creating new :class:`PizzaOrder` (pizza/create.html)
-    or accepts POST requests with the form to save its data.
+    or accepts POST requests with the form to save its data. Or return status error 405.
 
     Args:
         request: HttpRequest, accepted methods: GET, POST
 
     Returns:
-        * HttpResponse with rendered view form for new order
-        * Status code 405 if request method not GET
+        HttpResponse with rendered view form for new order, or error code 405
     """
-
     if request.method == 'GET':
         c = RequestContext(request, {
             'pizza_form': PizzaOrderForm(),
@@ -76,16 +73,6 @@ def create(request):
 
 
 def view(request, pizza_order_id):
-    """
-    This view collect data about pizza order by *id*.
-
-    Args:
-        request: HttpRequest, pizza_order_id
-
-    Returns:
-        * HttpResponse with rendered template selected order view.html
-        * Status code 405 if request method not GET
-    """
     if request.method == 'GET':
         # pizza = get_object_or_404(PizzaOrder, id=pizza_order_id)
         try:
@@ -108,18 +95,6 @@ def view(request, pizza_order_id):
 
 
 def close(request, pizza_order_id):
-    """
-    This close view get pizza order by *id*, mark it delivered
-    and redirects to view page of pizza order.
-
-    Args:
-        request: HttpRequest, pizza_order_id
-
-    Returns:
-        * HttpResponse with rendered template view.html with new state of order
-        * Status code 404 with message ``'Does not exist'``
-        * Status code 405 if request method not GET
-    """
     if request.method == 'GET':
         try:
             pizza = get_object_or_404(PizzaOrder, id=pizza_order_id)
@@ -140,9 +115,7 @@ def stats(request):
     the created orders. As a result returns an HttpResponse with task's id.
 
     :param request: HttpRequest, allowed methods: GET
-    :returns:
-        * HttpResponse with task's id
-        * Status code 405 if request method not GET
+    :returns: HttpResponse with task's id or error
     """
     if request.method == 'GET':
         # TODO: add

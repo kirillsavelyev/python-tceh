@@ -87,7 +87,7 @@ def send_notification(order_id):
 def greet_new_orders(run_every=timedelta(seconds=5)):
     orders_to_notify = PizzaOrder.objects.filter(
         notifications__isnull=True,
-    )  # .values_list('id', flat=True)
+    ).values_list('id', flat=True)
 
     # return orders_to_notify
 

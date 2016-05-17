@@ -3,25 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to pizza_project's documentation!
-=========================================
+Rest API
+========
 
 Contents:
 
 .. toctree::
    :maxdepth: 3
 
-   articles/purpose
-   modules/pizza/views
-   rest_api.rst
-
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   modules/rest_api/urls
+   rest_classes.rst
 
